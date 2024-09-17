@@ -81,10 +81,14 @@
             ]);
 
             const edges = new vis.DataSet();
+            const addedUsers = new Set();
 
             users.forEach((user) => {
-                nodes.add({ id: user.user_username, label: user.user_name });
-                edges.add({ from: 'FuerzaAerea', to: user.user_username });
+                if (!addedUsers.has(user.user_username)) {
+                    nodes.add({ id: user.user_username, label: user.user_name });
+                    edges.add({ from: 'FuerzaAerea', to: user.user_username });
+                    addedUsers.add(user.user_username);
+                }
             });
 
             const container = document.getElementById('mynetwork');
